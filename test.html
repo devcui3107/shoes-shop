@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .popular__list {
+                overflow: hidden;
+                width: 100%;
+            }
+            .row {
+                display: flex;
+                flex-wrap: nowrap;
+                transition: transform 0.5s ease;
+            }
+            .prod__box {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 200px; /* Adjust this as needed */
+                height: 300px;
+                background: orange;
+                margin-right: 10px; /* Add margin to space out items */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="popular__list">
+            <div class="items popular__items">
+                <div class="item popular__item">
+                    <div class="row gy-4 row-cols-5" id="carouselRow">
+                        <!-- Item 1 -->
+                        <div class="col">
+                            <div class="prod__box">Item 1</div>
+                        </div>
+
+                        <div class="col">
+                            <div class="prod__box">Item 2</div>
+                        </div>
+                        <div class="col">
+                            <div class="prod__box">Item 3</div>
+                        </div>
+                        <div class="col">
+                            <div class="prod__box">Item 4</div>
+                        </div>
+                        <div class="col">
+                            <div class="prod__box">Item 5</div>
+                        </div>
+                        <div class="col">
+                            <div class="prod__box">Item 6</div>
+                        </div>
+                        <div class="col">
+                            <div class="prod__box">Item 7</div>
+                        </div>
+                        <div class="col">
+                            <div class="prod__box">Item 8</div>
+                        </div>
+                        <div class="col">
+                            <div class="prod__box">Item 9</div>
+                        </div>
+                        <div class="col">
+                            <div class="prod__box">Item 10</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const row = document.querySelector(".row");
+                const items = document.querySelectorAll(".col");
+                let currentIndex = 0;
+                let visibleItems = calculateVisibleItems(); // Số lượng item hiển thị tại mỗi lần
+                let itemWidth = items[0].offsetWidth + parseFloat(getComputedStyle(items[0]).marginRight);
+                let isHovered = false;
+                let startX = 0;
+                let startOffsetX = 0;
+                let isTouchDevice = "ontouchstart" in window || navigator.msMaxTouchPoints;
+                let isTouching = false;
+
+                function calculateVisibleItems() {
+                    const screenWidth = window.innerWidth;
+                    if (screenWidth >= 1200) {
+                        return 8; // Desktop: 8 items
+                    } else if (screenWidth >= 768) {
+                        return 6; // Tablet: 6 items
+                    } else {
+                        return 4; // Mobile: 4 items
+                    }
+                }
+
+                function slide() {
+                    if (!isHovered && !isTouching) {
+                        currentIndex++;
+                        const maxIndex = items.length - visibleItems;
+                        if (currentIndex > maxIndex) {
+                            currentIndex = 0;
+                            setTimeout(() => {
+                                row.style.transition = "none";
+                                row.style.transform = `translateX(0)`;
+                                setTimeout(() => {
+                                    row.style.transition = "transform 0.5s ease";
+                                    row.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+                                }, 50);
+                            }, 150); // Short delay to reset
+                        } else {
+                            row.style.transition = "transform 0.5s ease";
+                            row.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+                        }
+                    }
+                }
+
+                setInterval(slide, 3000); // Slide every 3 seconds
+
+                // Pause automatic slide on hover
+                row.addEventListener("mouseenter", function () {
+                    isHovered = true;
+                });
+
+                row.addEventListener("mouseleave", function () {
+                    isHovered = false;
+                });
+
+                // Handle manual dragging
+                row.addEventListener(isTouchDevice ? "touchstart" : "mousedown", function (e) {
+                    isTouching = true;
+                    startX = isTouchDevice ? e.touches[0].clientX : e.clientX;
+                    startOffsetX = 0;
+
+                    const handleMove = function (event) {
+                        if (isTouching) {
+                            const currentX = isTouchDevice ? event.touches[0].clientX : event.clientX;
+                            startOffsetX = currentX - startX;
+                            row.style.transition = "none";
+                            row.style.transform = `translateX(-${currentIndex * itemWidth - startOffsetX}px)`;
+                        }
+                    };
+
+                    const handleEnd = function () {
+                        if (isTouching) {
+                            isTouching = false;
+                            currentIndex = Math.round((currentIndex * itemWidth - startOffsetX) / itemWidth);
+                            const maxIndex = items.length - visibleItems;
+                            if (currentIndex < 0) currentIndex = 0;
+                            if (currentIndex > maxIndex) currentIndex = maxIndex;
+                            row.style.transition = "transform 0.5s ease";
+                            row.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+                            document.removeEventListener(isTouchDevice ? "touchmove" : "mousemove", handleMove);
+                            document.removeEventListener(isTouchDevice ? "touchend" : "mouseup", handleEnd);
+                        }
+                    };
+
+                    document.addEventListener(isTouchDevice ? "touchmove" : "mousemove", handleMove);
+                    document.addEventListener(isTouchDevice ? "touchend" : "mouseup", handleEnd);
+                });
+
+                // Adjust itemWidth and visibleItems on window resize
+                window.addEventListener("resize", function () {
+                    itemWidth = items[0].offsetWidth + parseFloat(getComputedStyle(items[0]).marginRight);
+                    visibleItems = calculateVisibleItems();
+                    currentIndex = 0;
+                    row.style.transition = "none";
+                    row.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+                });
+
+                // Initial calculation of visibleItems based on screen width
+                row.style.transition = "transform 0.5s ease";
+                row.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+            });
+        </script>
+    </body>
+</html>

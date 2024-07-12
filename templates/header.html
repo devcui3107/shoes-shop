@@ -1,0 +1,119 @@
+<div class="container">
+    <div class="header__inner">
+        <div class="header__top">
+            <!-- Logo -->
+            <a href="./" class="logo header__logo">
+                <h2 class="logo__text">iSMART</h2>
+            </a>
+
+            <!-- Form Search -->
+            <form action="" class="search d-md-none">
+                <input type="text" class="search__input" placeholder="Search..." />
+                <button class="search__btn">
+                    <img src="./assets/images/icons/search.svg" alt="" class="search__btn-icon" />
+                </button>
+            </form>
+
+            <!-- CTA -->
+            <a href="#!" class="toggle-dark d-lg-none" id="switch-theme-btn">
+                <span class="toggle-dark__inner">Dark Mode</span>
+            </a>
+            <div class="header__shop">
+                <a href="#!" class="header__info">
+                    <img src="./assets/images/icons/user.svg" alt="" class="user__icon" />
+                </a>
+                <a href="#!" class="header__info">
+                    <img src="./assets/images/icons/favourite.svg" alt="" class="favourite__icon" />
+                    <span class="header__info-text">(0)</span>
+                </a>
+                <a href="#!" class="header__info">
+                    <img src="./assets/images/icons/cart.svg" alt="" class="cart__icon" />
+                    <span class="header__info-text">(0)</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="menu-mobile">
+            <!-- More -->
+            <button class="menu-mobile__more js-toggle" toggle-target="#navbar">
+                <img src="./assets/images/icons/more.svg" alt="" class="header__more-img" />
+                Menu
+            </button>
+
+            <!-- Form Search Mobile-->
+            <form action="" class="search search__mobile d-md-block">
+                <input type="text" class="search__input" placeholder="Search..." />
+                <button class="search__btn">
+                    <img src="./assets/images/icons/search.svg" alt="" class="search__btn-icon" />
+                </button>
+            </form>
+        </div>
+
+        <!-- Menu Top -->
+        <nav class="navbar hide" id="navbar">
+            <button class="navbar__back js-toggle" toggle-target="#navbar">
+                <img src="../assets/images/icons/arrow-left.svg" alt="" class="navbar__back-img" />
+            </button>
+            <!-- Title Menu Sibar -->
+            <div class="navbar__top-mobile">
+                <p class="navbar__title">MENU</p>
+            </div>
+            <ul class="navbar__list">
+                <li class="navbar__item">
+                    <a href="#!" class="navbar__link">Trang Chủ</a>
+                </li>
+                <li class="navbar__item navbar__item-dropdown">
+                    <a href="#!" class="navbar__link">
+                        Sản Phẩm
+                        <img src="./assets/images/icons/arrow-bottom.svg" alt="" class="navbar__link-icon" />
+                    </a>
+
+                    <div class="dropdown">
+                        <div class="dropdown__inner">
+                            <ul class="dropdown__list">
+                                <li class="dropdown__item">
+                                    <a href="#!" class="dropdown__link">Điện thoại</a>
+                                </li>
+                                <li class="dropdown__item">
+                                    <a href="#!" class="dropdown__link">Máy tính bảng</a>
+                                </li>
+                                <li class="dropdown__item">
+                                    <a href="#!" class="dropdown__link">Laptop</a>
+                                </li>
+                                <li class="dropdown__item">
+                                    <a href="#!" class="dropdown__link">Phụ kiện</a>
+                                </li>
+                                <li class="dropdown__item">
+                                    <a href="#!" class="dropdown__link">Ốp lưng</a>
+                                </li>
+                                <li class="dropdown__item">
+                                    <a href="#!" class="dropdown__link">Linh kiện</a>
+                                </li>
+                                <li class="dropdown__item">
+                                    <a href="#!" class="dropdown__link">Tai nghe</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="navbar__item">
+                    <a href="#!" class="navbar__link">Cửa Hàng</a>
+                </li>
+                <li class="navbar__item">
+                    <a href="#!" class="navbar__link">Liên hệ</a>
+                </li>
+                <li class="navbar__item">
+                    <a href="#!" class="navbar__link">Giới thiệu</a>
+                </li>
+                <li class="navbar__item">
+                    <a href="#!" class="navbar__link">Bài viết</a>
+                </li>
+            </ul>
+
+            <a href="#!" class="toggle-dark__mobile toggle-dark" id="switch-theme-btn-mb">
+                <span class="toggle-dark__inner">Dark Mode</span>
+            </a>
+        </nav>
+        <div class="navbar__overlay js-toggle" toggle-target="#navbar"></div>
+    </div>
+</div>
