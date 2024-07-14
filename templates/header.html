@@ -3,7 +3,8 @@
         <div class="header__top">
             <!-- Logo -->
             <a href="./" class="logo header__logo">
-                <h2 class="logo__text">iSMART</h2>
+                <!-- <h2 class="logo__text">iSMART</h2> -->
+                <img src="./assets/images/header/logo.png" alt="" class="logo__img" />
             </a>
 
             <!-- Form Search -->
@@ -15,9 +16,16 @@
             </form>
 
             <!-- CTA -->
-            <a href="#!" class="toggle-dark d-lg-none" id="switch-theme-btn">
-                <span class="toggle-dark__inner">Dark Mode</span>
+            <a href="#!" class="toggle-dark d-md-none" id="switch-theme-btn">
+                <img src="./assets/images/icons/sun-dark.svg" alt="Dark Mode Icon" id="dark-icon" class="theme-icon" />
+                <img
+                    src="./assets/images/icons/sun-light.svg"
+                    alt="Light Mode Icon"
+                    id="light-icon"
+                    class="theme-icon"
+                />
             </a>
+
             <div class="header__shop">
                 <a href="#!" class="header__info">
                     <img src="./assets/images/icons/user.svg" alt="" class="user__icon" />
@@ -52,7 +60,7 @@
         <!-- Menu Top -->
         <nav class="navbar hide" id="navbar">
             <button class="navbar__back js-toggle" toggle-target="#navbar">
-                <img src="../assets/images/icons/arrow-left.svg" alt="" class="navbar__back-img" />
+                <img src="./assets/images/icons/arrow-left.svg" alt="" class="navbar__back-img" />
             </button>
             <!-- Title Menu Sibar -->
             <div class="navbar__top-mobile">
@@ -110,8 +118,20 @@
                 </li>
             </ul>
 
+            <!-- Dark Mode Mobile -->
             <a href="#!" class="toggle-dark__mobile toggle-dark" id="switch-theme-btn-mb">
-                <span class="toggle-dark__inner">Dark Mode</span>
+                <img
+                    src="./assets/images/icons/sun-dark.svg"
+                    alt="Dark Mode Icon"
+                    id="dark-icon-mb"
+                    class="theme-icon"
+                />
+                <img
+                    src="./assets/images/icons/sun-light.svg"
+                    alt="Light Mode Icon"
+                    id="light-icon-mb"
+                    class="theme-icon"
+                />
             </a>
         </nav>
         <div class="navbar__overlay js-toggle" toggle-target="#navbar"></div>

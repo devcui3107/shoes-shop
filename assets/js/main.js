@@ -221,37 +221,65 @@ function changeImage(imageSrc, thumb) {
     thumb.classList.add('prod-preview__thumb-img--current');
 }
 
+//Dark Mode
 window.addEventListener("template-loaded", () => {
     const switchBtn = document.querySelector("#switch-theme-btn");
+    const lightIcon = document.querySelector("#light-icon");
+    const darkIcon = document.querySelector("#dark-icon");
+
+    function updateIcons(isDark) {
+        if (isDark) {
+            lightIcon.classList.add("theme-icon__active");
+            darkIcon.classList.remove("theme-icon__active");
+        } else {
+            lightIcon.classList.remove("theme-icon__active");
+            darkIcon.classList.add("theme-icon__active");
+        }
+    }
+
     if (switchBtn) {
         switchBtn.onclick = function () {
             const isDark = localStorage.dark === "true";
             document.querySelector("html").classList.toggle("dark", !isDark);
             localStorage.setItem("dark", !isDark);
-            switchBtn.querySelector("span").textContent = isDark ? "Dark Mode" : "Light Mode";
+            updateIcons(!isDark);
         };
+
         const isDark = localStorage.dark === "true";
-        switchBtn.querySelector("span").textContent = isDark ? "Light Mode" : "Dark Mode";
+        document.querySelector("html").classList.toggle("dark", isDark);
+        updateIcons(isDark);
     }
 });
 
-//Mobile
 window.addEventListener("template-loaded", () => {
-    const switchBtn = document.querySelector("#switch-theme-btn-mb");
-    if (switchBtn) {
-        switchBtn.onclick = function () {
+    // Mobile
+    const switchBtnMb = document.querySelector("#switch-theme-btn-mb");
+    const lightIconMb = document.querySelector("#light-icon-mb");
+    const darkIconMb = document.querySelector("#dark-icon-mb");
+
+    function updateIcons(isDark) {
+        if (isDark) {
+            lightIconMb.classList.add("theme-icon__active");
+            darkIconMb.classList.remove("theme-icon__active");
+        } else {
+            lightIconMb.classList.remove("theme-icon__active");
+            darkIconMb.classList.add("theme-icon__active");
+        }
+    }
+
+    if (switchBtnMb) {
+        switchBtnMb.onclick = function () {
             const isDark = localStorage.dark === "true";
             document.querySelector("html").classList.toggle("dark", !isDark);
             localStorage.setItem("dark", !isDark);
-            switchBtn.querySelector("span").textContent = isDark ? "Dark Mode" : "Light Mode";
+            updateIcons(!isDark);
         };
+
         const isDark = localStorage.dark === "true";
-        switchBtn.querySelector("span").textContent = isDark ? "Light Mode" : "Dark Mode";
+        document.querySelector("html").classList.toggle("dark", isDark);
+        updateIcons(isDark);
     }
 });
-
-const isDark = localStorage.dark === "true";
-document.querySelector("html").classList.toggle("dark", isDark);
 
 
 
@@ -333,3 +361,27 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+// Back to top
+document.addEventListener("DOMContentLoaded", function () {
+    window.onscroll = function () {
+        toggleBackToTopButton();
+    };
+
+    function toggleBackToTopButton() {
+        const backToTopButton = document.getElementById("back-to-top");
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            backToTopButton.style.display = "flex";
+        } else {
+            backToTopButton.style.display = "none";
+        }
+    }
+
+    // Gán sự kiện click cho nút "Back to Top"
+    const backToTopButton = document.getElementById("back-to-top");
+    backToTopButton.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" }); // Cuộn mượt lên đầu trang
+    });
+
+    // Khởi tạo trạng thái ban đầu của nút
+    toggleBackToTopButton();
+});
